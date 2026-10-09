@@ -1,0 +1,17 @@
+name: My first Workflow
+
+on:
+  push:
+    branches:
+      -main
+    
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Welcome Action
+        run: echo "Welcome to my first workflow!"
+
+      - name: check Node version
+        run: node --version
