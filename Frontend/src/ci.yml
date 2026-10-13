@@ -1,5 +1,4 @@
 name: My first Workflow
-
 on:
   push:
     branches:
