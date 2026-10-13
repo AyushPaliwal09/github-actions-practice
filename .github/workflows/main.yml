@@ -34,5 +34,5 @@ jobs:
             echo "Successfully connected to EC2!"
             docker --version
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-            docker --rm -f my-app-container || true
-            docker run -d --name my-app-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+            sudo docker rm -f my-app-container || true
+            sudo docker run -d --name my-app-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-app:latest
