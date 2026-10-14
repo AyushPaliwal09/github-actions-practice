@@ -38,7 +38,7 @@ jobs:
           context: ./Frontend
           file: ./Frontend/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.tags }}
+          tags: ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name || 'latest' }}:${{ github.event.inputs.tags }}
       - name: SSH into EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
@@ -49,6 +49,6 @@ jobs:
           script: |
             echo "Successfully connected to EC2!"
             docker --version
-            sudo docker pull ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.tags }}
+            sudo docker pull ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name || 'latest' }}:${{ github.event.inputs.tags }}
             sudo docker rm -f my-app-container || true
-            sudo docker run -d --name my-app-container -p 80:80 ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name }}:${{ github.event.inputs.tags }}
+            sudo docker run -d --name my-app-container -p 80:80 ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name || 'latest' }}:${{ github.event.inputs.tags }}
