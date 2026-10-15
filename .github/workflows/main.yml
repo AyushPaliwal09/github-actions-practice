@@ -32,7 +32,7 @@ jobs:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
       - name: Build and push Docker image
-        if : contains(github.event.head_commit.modified, 'Frontend/Dockerfile') 
+        # if : contains(github.event.head_commit.modified, 'Frontend/Dockerfile') 
         uses: docker/build-push-action@v5.4.0
         with:
           context: ./Frontend
