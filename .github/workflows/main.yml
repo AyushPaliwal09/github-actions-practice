@@ -39,6 +39,10 @@ jobs:
           file: ./Frontend/Dockerfile
           push: true
           tags: ${{ env.DOCKER_USERNAME }}/${{ github.event.inputs.image_name || 'my-app' }}:${{ github.event.inputs.tags || 'latest' }}
+           # Import previously saved cache
+          cache-from: type=gha,scope=frontend
+          # Save updated cache
+          cache-to: type=gha,mode=max,scope=frontend
       - name: SSH into EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
