@@ -1,0 +1,28 @@
+
+name: Artifact Practice
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create File
+        run: |
+          mkdir -p output
+          echo "Hello from GitHub Actions" > output/result.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: output/
+          retention-days: 7
