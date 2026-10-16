@@ -1,0 +1,27 @@
+name: My first Workflow
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+  first-job:
+    runs-on: matrix.os
+    strategy:
+      matrix:
+        include:
+          - os: [ubuntu-latest, windows-latest]
+            node-version: [18.x, 20.x]
+
+    steps:
+      - name: Welcome Action
+        run: echo "Welcome to my first workflow!"
+      
+      - name : Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: check Node version
+        run: node --version
+         
