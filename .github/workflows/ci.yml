@@ -4,14 +4,14 @@ on:
     branches:
       - main
     tags:
-      - "v*"
+      - "v*.*.*"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-   release:
+   test:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -29,7 +29,11 @@ jobs:
 
       - name: check Node version
         run: node --version
-        
+    release:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
